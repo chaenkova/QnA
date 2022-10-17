@@ -1,2 +1,15 @@
 h1=question.title
 p= question.body
+br
+- if current_user&.author?(@question)
+  p= button_to 'Delete question',question_path(@question), method: :delete
+
+- @question.answers.each do |answer|
+    - unless answer.new_record?
+      p= answer.body
+      - if current_user&.author?(answer)
+        p= button_to 'Delete answer', answer_path(answer), method: :delete
+        br
+
+-if current_user.present?
+  = render 'answers/form'
