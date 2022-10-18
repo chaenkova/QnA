@@ -1,0 +1,5 @@
+= render @questions
+
+p=link_to 'Ask question', new_question_path
+- if current_user.present?
+  p=button_to 'Log out', destroy_user_session_path, method: :delete
