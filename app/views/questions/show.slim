@@ -7,7 +7,8 @@ br
 -if current_user.present?
   .answer-errors
     = render 'shared/errors', resource: @answer
-  = form_with model: [@question, @answer], class: 'new-answer', local: true do |f|
+
+  = form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
     = f.label :body, 'New answer'
     = f.text_area :body
     = f.submit 'Create'
