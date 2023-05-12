@@ -7,13 +7,12 @@ class AnswersController < ApplicationController
   end
   def create
     @answer = @question.answers.create(answer_params.merge(user: current_user))
-    respond_to :js
+    render layout: false
   end
 
   def update
-    @answer.update(answer_params)
-    @question = @answer.question
-    @answer.save
+    @answer = @question.answers.update(answer_params.merge(user: current_user))
+    render layout: false
   end
 
   def destroy
