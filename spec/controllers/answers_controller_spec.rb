@@ -33,7 +33,7 @@ RSpec.describe AnswersController, type: :controller do
     before { get :new, params: { question_id: question } }
 
     it 'renders new view' do
-      expect(response).to render_template :new
+      expect(response).to render_template 'questions/show'
     end
   end
 
@@ -83,17 +83,20 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do
+    before { login(user) }
     let!(:answer) { create(:answer, question: question) }
 
     context 'with valid attributes' do
       it 'changes answer attributes' do
-        patch :update, params: { id: answer, answer: { body: 'new body' } }, format: :js
+        put :update, params: { id: answer.id, answer: { body: 'new body' } }, format: :js
         answer.reload
+        p answer.body
         expect(answer.body).to eq 'new body'
       end
-
+      # аутентификация
       it 'renders update view' do
-        patch :update, params: { id: answer, answer: { body: 'new body' } }, format: :js
+        patch :update, params: { id: answer.id, answer: { body: 'new body' } }, format: :js
+        p response
         expect(response).to render_template :update
       end
     end
@@ -101,7 +104,7 @@ RSpec.describe AnswersController, type: :controller do
     context 'with invalid attributes' do
       it 'does not change answer attributes' do
         expect do
-          patch :update, params: { id: answer, answer: attributes_for(:answer, :invalid) }, format: :js
+          patch :update, params: { id: answer.id, answer: attributes_for(:answer, :invalid) }, format: :js
         end.to_not change(answer, :body)
       end
 

@@ -4,6 +4,7 @@ class AnswersController < ApplicationController
   before_action :find_answer, only: %i[destroy update]
   def new
     @answer = Answer.new
+    render 'questions/show'
   end
   def create
     @answer = @question.answers.create(answer_params.merge(user: current_user))
@@ -11,8 +12,9 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = @question.answers.update(answer_params.merge(user: current_user))
-    render layout: false
+    p @answer
+    @answer.update(answer_params.merge(user: current_user))
+    #render layout: false
   end
 
   def destroy
