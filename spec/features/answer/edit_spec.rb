@@ -8,7 +8,7 @@ feature 'User can edit his answer', %q{
 
   given!(:user) { create(:user) }
   given!(:question) { create(:question) }
-  given!(:answer) { create(:answer, question: question) }
+  given!(:answer) { create(:answer, question: question, user: user) }
 
   scenario 'Unauthenticated can not edit answer' do
     visit question_path(question)

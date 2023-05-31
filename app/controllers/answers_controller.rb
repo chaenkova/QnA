@@ -12,9 +12,8 @@ class AnswersController < ApplicationController
   end
 
   def update
-    p @answer
     @answer.update(answer_params.merge(user: current_user))
-    #render layout: false
+    render layout: false
   end
 
   def destroy
