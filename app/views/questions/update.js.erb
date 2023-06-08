@@ -1,0 +1,15 @@
+
+<% if @question.persisted? %>
+$('.question-errors').html('<%= render 'shared/errors', resource: @question %>');
+$('h1').html('<%= @question.title %>');
+$('#edit-question-link').addClass('hidden');
+
+$(document).on('turbolinks:load', function(){
+    $('.question').on('click', '.edit-question-link', function(e) {
+        e.preventDefault();
+        $(this).hide();
+        $('form#edit-question').removeClass('hidden');
+    })
+});
+
+<% end %>

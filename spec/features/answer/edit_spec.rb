@@ -51,7 +51,7 @@ feature 'User can edit his answer', %q{
     expect(page).to have_content "Body can't be blank"
     end
 
-    scenario "tries to edit other user's question", js: true do
+    scenario "tries to edit other user's answer", js: true do
       sign_in user2
       visit question_path(question)
 
