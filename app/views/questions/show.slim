@@ -1,4 +1,6 @@
 .question
+  .question-errors
+    = render 'shared/errors', resource: @question
   h1=@question.title
   p.question-body= @question.body
   br
@@ -6,7 +8,7 @@
     p = button_to 'Delete question',question_path(@question), method: :delete
     = link_to 'Edit', '#', class: 'edit-question-link'
     = form_with model: @question, class: 'hidden', id: "edit-question", local: false, method: :patch do |f|
-      = f.label :title, 'You question'
+      = f.label :title
       = f.text_field :title
       = f.label :body
       = f.text_area :body
