@@ -1,7 +1,7 @@
 
 <% if @answer.persisted? %>
 $('.answer-errors').html('<%= render 'shared/errors', resource: @answer %>');
-$('.answer-<%=@answer.id %>').html('<%= @answer.body %>');
+$('.answer-<%=@answer.id %>')[0].firstChild.innerHTML = '<%= @answer.body %>';
 $('#edit-answer-<%=@answer.id %>').addClass('hidden');
 $('.answers').on('click', '.edit-answer-link[data-answer-id="<%=@answer.id %>"]', function(e) { //дублируется. как вызвать функцию из ассетов
     e.preventDefault();

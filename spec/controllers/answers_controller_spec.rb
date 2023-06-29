@@ -45,13 +45,13 @@ RSpec.describe AnswersController, type: :controller do
     context 'The author can delete his question or answer' do
       before { login(user) }
       it 'answer was deleted' do
-        delete :destroy, params: {id: answer}
+        delete :destroy, params: {id: answer, format: :js}
         expect(assigns(:answer)).to be_destroyed
       end
 
-      it 'redirects to questions list' do
-        delete :destroy, params: { id: answer }
-        expect(response).to redirect_to question_path(question)
+      it 'no redirects' do
+        delete :destroy, params: { id: answer, format: :js }
+        expect(response).to render_template :destroy
       end
     end
 
@@ -65,7 +65,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'redirects to questions list' do
         delete :destroy, params: { id: answer }
-        expect(response).to redirect_to question_path(question)
+        expect(response).to redirect_to questions_path
       end
     end
 

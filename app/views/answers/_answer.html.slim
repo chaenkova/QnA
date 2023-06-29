@@ -1,10 +1,10 @@
 - unless answer.new_record?
-  p class="answer-#{answer.id}"= answer.body
-  - if current_user&.author?(answer)
-    p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
-    p= button_to 'Delete answer', answer_path(answer), method: :delete
-    //переделать на js
-    = form_with model: answer, class: 'hidden', id: "edit-answer-#{answer.id}", local: false, method: :patch do |f|
-      = f.label :body, "Your answer"
-      = f.text_area :body
-      = f.submit 'Save'
+  div class="answer-#{answer.id}"
+    p= answer.body
+    - if current_user&.author?(answer)
+      p= link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+      p= button_to 'Delete answer', answer_path(answer), remote: true, method: :delete
+      = form_with model: answer, class: 'hidden', id: "edit-answer-#{answer.id}", local: false, method: :patch do |f|
+        = f.label :body, "Your answer"
+        = f.text_area :body
+        = f.submit 'Save'
