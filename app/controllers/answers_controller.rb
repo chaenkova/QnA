@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :find_question, only: %i[create]
-  before_action :find_answer, only: %i[destroy update]
+  before_action :find_answer, only: %i[destroy update mark_as_best]
   def new
     @answer = Answer.new
     render 'questions/show'
@@ -19,9 +19,18 @@ class AnswersController < ApplicationController
   def destroy
     if current_user.author?(@answer)
       @answer.destroy
+      @question = @answer.question
       render layout: false
     else
       redirect_to questions_path
+    end
+  end
+
+  def mark_as_best
+    if current_user.author?(@answer.question)
+      @answer.mark
+      @question = @answer.question
+      render layout: false
     end
   end
 
