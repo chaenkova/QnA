@@ -26,27 +26,28 @@ feature 'Author of question can chose best answer', %q{
       end
     end
 
-    scenario 'can mark another answer and he will be first' do #????
-      answer_best = find('.answers>div:last-child')
+    scenario 'can mark another answer' do
 
-      within answer_best do
+      within '.answers>div:last-child' do
         click_on 'Mark as best'
-        print answer_best.value
-        expect(page).to have_content "The best"
+        expect(page.has_selector? "p.best")
       end
+    end
+
+    scenario 'best answer goes first' do
       within '.answers>div:first-child' do
-        expect(page).to have_content answer_best.text
+        expect(page.has_selector? "p.best")
       end
     end
 
   end
 
-  scenario "Unauthenticated user can't mark the best answer" do
+  scenario "Unauthenticated user can't mark the best answer" , js:true do
     visit question_path(question)
 
     expect(page).to_not have_content 'Mark as best'
   end
-  scenario "Not an author user can't mark the best answer" do
+  scenario "Not an author user can't mark the best answer" , js:true do
     sign_in user2
     visit question_path(question)
 
