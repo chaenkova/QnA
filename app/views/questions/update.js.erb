@@ -3,6 +3,7 @@
     $('.question-errors').html('<%= render 'shared/errors', resource: @question %>');
     $('h1').html('<%= @question.title %>');
     $('.question-body').html('<%= @question.body %>');
+    $('.files').html('<%= render 'files', resource: @question %>');
     $('#edit-question-link').addClass('hidden');
 
     $(document).on('turbolinks:load', function(){
