@@ -1,15 +1,27 @@
-h1=question.title
-p= question.body
+.question
+  .question-errors
+    = render 'shared/errors', resource: @question
+  h1=@question.title
+  p.question-body= @question.body
+  br
+  - if current_user&.author?(@question)
+    p = button_to 'Delete question',question_path(@question), method: :delete
+    = link_to 'Edit', '#', class: 'edit-question-link'
+    = form_with model: @question, class: 'hidden', id: "edit-question", local: false, method: :patch do |f|
+      = f.label :title
+      = f.text_field :title
+      = f.label :body
+      = f.text_area :body
+      = f.submit 'Save'
 br
-- if current_user&.author?(@question)
-  p= button_to 'Delete question',question_path(@question), method: :delete
-
-- @question.answers.each do |answer|
-    - unless answer.new_record?
-      p= answer.body
-      - if current_user&.author?(answer)
-        p= button_to 'Delete answer', answer_path(answer), method: :delete
-        br
-
 -if current_user.present?
-  = render 'answers/form'
+  .answer-errors
+    = render 'shared/errors', resource: @answer
+
+  = form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
+    = f.label :body, 'New answer'
+    = f.text_area :body
+    = f.submit 'Create'
+
+.answers
+  =render @question.answers.order(best: :desc)

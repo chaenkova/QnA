@@ -9,7 +9,7 @@ feature 'User can delete his question', "
   given(:question) { create(:question) }
   given!(:answer) { create(:answer, user: user) }
 
-  scenario 'Authenticated user destroys own answer' do
+  scenario 'Authenticated user destroys own answer', js: true do
     sign_in(answer.user)
     visit question_path answer.question
     click_on 'Delete'

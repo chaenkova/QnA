@@ -1,0 +1,14 @@
+- unless answer.new_record?
+  div class="answer-#{answer.id}" data={best: "#{answer.best}"}
+    p= answer.body
+    - if current_user&.author?(answer)
+      - if current_user&.author?(answer.question)
+        = button_to 'Mark as best', mark_as_best_path(answer), method: :post, remote: true
+      - if answer.best
+        p.best="The best"
+      = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+      = button_to 'Delete answer', answer_path(answer), remote: true, method: :delete
+      = form_with model: answer, class: 'hidden', id: "edit-answer-#{answer.id}", local: false, method: :patch do |f|
+        = f.label :body, "Your answer"
+        = f.text_area :body
+        = f.submit 'Save'

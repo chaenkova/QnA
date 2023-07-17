@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-
+    @question = Question.new
   end
 
   def edit
@@ -29,11 +29,8 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if question.update(question_params)
-      redirect_to @question
-    else
-      render :edit
-    end
+    question.update(question_params.merge(user: current_user))
+    render layout: false
   end
 
   def destroy

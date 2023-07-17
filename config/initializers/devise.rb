@@ -17,7 +17,7 @@ Devise.setup do |config|
   # config.secret_key = '58be5db5409df4d4fbfe5605ac2645a2c61e0323d8fdf7261bdeeb2b0e3af83588875b054064948a3a0cdadb4e7d8592c10006686f04c70f7587c683f958598a'
 
   # ==> Controller configuration
-  # Configure the parent class to the devise controllers.
+  # Configure the parent class to the devise channels.
   # config.parent_controller = 'DeviseController'
 
   # ==> Mailer Configuration
@@ -264,6 +264,7 @@ Devise.setup do |config|
   #
   # The "*/*" below is required to match Internet Explorer requests.
   # config.navigational_formats = ['*/*', :html]
+   config.navigational_formats = ['/', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete

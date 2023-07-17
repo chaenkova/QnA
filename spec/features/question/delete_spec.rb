@@ -9,7 +9,7 @@ feature 'User can delete his question', "
   given(:user) { create(:user) }
   given!(:question) { create(:question, user: author) }
 
-  scenario 'Author delete his question' do
+  scenario 'Author delete his question', js: true do
     sign_in(author)
     visit question_path(question)
     click_on 'Delete question'
@@ -17,14 +17,14 @@ feature 'User can delete his question', "
     expect(page).to_not have_content question.title
   end
 
-  scenario "Authenticated user can't destroy other user's question" do
+  scenario "Authenticated user can't destroy other user's question", js: true do
     sign_in(user)
     visit question_path(question)
 
     expect(page).to_not have_link 'Delete answer'
   end
 
-  scenario "Unauthenticated user can't destroy question" do
+  scenario "Unauthenticated user can't destroy question", js: true do
     visit question_path(question)
 
     expect(page).to_not have_link 'Delete answer'

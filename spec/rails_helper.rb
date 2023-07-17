@@ -35,6 +35,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
+  Capybara.javascript_driver = :selenium_chrome_headless
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -48,7 +49,7 @@ RSpec.configure do |config|
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
+  # `post` in specs under `spec/channels`.
   #
   # You can disable this behaviour by removing the line below, and instead
   # explicitly tag your specs with their type, e.g.:
