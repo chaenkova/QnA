@@ -38,6 +38,13 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
+  def delete_file
+    if current_user.author?(@question)
+      @question.delete_file(params[:file_id])
+      redirect_to question_path(@question)
+    end
+  end
+
   private
 
   def question

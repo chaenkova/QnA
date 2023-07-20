@@ -13,5 +13,10 @@ FactoryBot.define do
       question
       user
     end
+
+    trait :with_files do
+      files { [Rack::Test::UploadedFile.new(Rails.root.join('spec/rails_helper.rb'))] }
+    end
   end
+
 end

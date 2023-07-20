@@ -112,4 +112,19 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE #delete_file' do
+    before { login(user) }
+
+    let(:another_answer) { create(:answer, :with_files, user: user) }
+
+    it 'deletes file attached to the answer' do
+      expect { delete :delete_file, params: { id: another_answer, file_id: another_answer.files.first.id } }.to change(another_answer.files, :count).by(-1)
+    end
+
+    it "redirects to the answer's question show view" do
+      delete :delete_file, params: { id: another_answer, file_id: another_answer.files.first.id }
+      expect(response).to redirect_to another_answer.question
+    end
+  end
 end
