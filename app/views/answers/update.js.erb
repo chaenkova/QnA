@@ -2,7 +2,7 @@
 <% if @answer.persisted? %>
 $('.answer-errors').html('<%= render 'shared/errors', resource: @answer %>');
 $('.answer-<%=@answer.id %>')[0].firstChild.innerHTML = '<%= @answer.body %>';
-$('.answer-<%=@answer.id %>>.files').html('<%= render 'files', resource: @answer %>');
+$('.answer-<%=@answer.id %>>.files').html('<%= render partial: 'answers/files', locals: {answer: @answer} %>');
 $('#edit-answer-<%=@answer.id %>').addClass('hidden');
 $('.answers').on('click', '.edit-answer-link[data-answer-id="<%=@answer.id %>"]', function(e) { //дублируется. как вызвать функцию из ассетов
     e.preventDefault();

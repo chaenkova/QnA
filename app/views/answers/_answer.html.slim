@@ -3,7 +3,7 @@
     p= answer.body
     - if answer.best
       p.best= "The best"
-    = render 'files', resource: answer
+    = render partial: 'answers/files', locals: {answer: answer}
     - if current_user&.author?(answer.question)
       = button_to 'Mark as best', mark_as_best_path(answer), method: :post, remote: true
     - if current_user&.author?(answer)
