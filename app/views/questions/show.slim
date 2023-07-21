@@ -3,6 +3,7 @@
     = render 'shared/errors', resource: @question
   h1=@question.title
   p.question-body= @question.body
+  = render 'files', resource: @question
   br
   - if current_user&.author?(@question)
     p = button_to 'Delete question',question_path(@question), method: :delete
@@ -12,6 +13,8 @@
       = f.text_field :title
       = f.label :body
       = f.text_area :body
+      = f.label :files
+      = f.file_field :files, multiple: true, direct_upload: true
       = f.submit 'Save'
 br
 -if current_user.present?
@@ -21,6 +24,8 @@ br
   = form_with model: [@question, @answer], class: 'new-answer', local: false do |f|
     = f.label :body, 'New answer'
     = f.text_area :body
+    = f.label :files
+    = f.file_field :files, multiple: true
     = f.submit 'Create'
 
 .answers

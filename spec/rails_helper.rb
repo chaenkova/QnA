@@ -20,7 +20,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
- Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -36,6 +36,33 @@ RSpec.configure do |config|
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
   Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.default_driver = :selenium
+
+  chrome_options = Selenium::WebDriver::Chrome::Options.new(
+    args: [
+      ## For constant resolutions and pretty Capybara screenshots
+      'window-size=1366,768',
+      ## For CI without camera
+      'use-fake-device-for-media-stream',
+      'use-fake-ui-for-media-stream'
+    ],
+    prefs: {
+      ## https://makandracards.com/makandra/71430-cucumber-testing-file-downloads-with-selenium
+      ##'download.default_directory' => DownloadHelpers::PATH
+    }
+  )
+
+  chrome_options.args << 'headless' unless ENV['SHOW_BROWSER']
+
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+  end
+
+  Capybara.register_driver :selenium_incognito do |app|
+    chrome_options.args << 'incognito'
+
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+  end
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -66,6 +93,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.after(:all) do
+    FileUtils.rm_rf("#{Rails.root}/tmp/storage")
+  end
 end
 
 Shoulda::Matchers.configure do |config|

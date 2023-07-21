@@ -1,18 +1,27 @@
 require 'rails_helper'
 
-feature 'User can delete his question', "
+feature 'User can delete his answer', "
   In order to delete yourself answer
   As an authenticated user
   I'd like to be able to delete my answer" do
 
-  given(:user) { create(:user) }
-  given(:question) { create(:question) }
-  given!(:answer) { create(:answer, user: user) }
+  let(:user) { create(:user) }
+  let(:question) { create(:question) }
+  let!(:answer) { create(:answer, :with_files, question: question, user: user) }
+
+  scenario 'Authenticated user destroys attached to answer file' do
+
+    sign_in(user)
+    visit question_path question
+
+    click_on 'Delete file'
+    expect(page).not_to have_content answer.files.first.filename.to_s
+  end
 
   scenario 'Authenticated user destroys own answer', js: true do
     sign_in(answer.user)
     visit question_path answer.question
-    click_on 'Delete'
+    click_on 'Delete answer'
 
     expect(page).to_not have_content answer.body
   end

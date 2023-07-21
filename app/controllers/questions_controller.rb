@@ -38,15 +38,22 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
+  def delete_file
+    if current_user.author?(@question)
+      @question.delete_file(params[:file_id])
+      redirect_to question_path(@question)
+    end
+  end
+
   private
 
   def question
-    @question ||= params[:id] ? Question.find(params[:id]) : Question.new
+    @question ||= params[:id] ? Question.with_attached_files.find(params[:id]) : Question.new
   end
 
   helper_method :question
 
   def question_params
-    params.require(:question).permit(:title, :body, :id)
+    params.require(:question).permit(:title, :body, :id, files: [])
   end
 end

@@ -27,6 +27,19 @@ feature 'User can edit question', %q{
       expect(page).to have_content 'Test text'
     end
 
+    scenario 'edit own question whith files', js: true do
+
+      within '.question' do
+        click_on 'Edit'
+
+        attach_file 'File', ["#{Rails.root}/spec/rails_helper.rb", "#{Rails.root}/spec/spec_helper.rb"]
+
+        click_on 'Save'
+      end
+      expect(page).to have_link 'rails_helper'
+      expect(page).to have_link 'spec_helper'
+    end
+
 
     scenario 'edit own a question with errors', js: true do
 

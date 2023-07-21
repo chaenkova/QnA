@@ -7,10 +7,22 @@ feature 'User can delete his question', "
 " do
   given(:author) { create(:user) }
   given(:user) { create(:user) }
-  given!(:question) { create(:question, user: author) }
+  given(:question) { create(:question, :with_files, user: user) }
+
+
+  scenario 'Authenticated user destroys attached to question file' do
+
+    sign_in user
+    visit question_path(question)
+
+    within '.question' do
+      click_on 'Delete file'
+    end
+    expect(page).not_to have_content question.files.first.filename.to_s
+  end
 
   scenario 'Author delete his question', js: true do
-    sign_in(author)
+    sign_in(user)
     visit question_path(question)
     click_on 'Delete question'
 
