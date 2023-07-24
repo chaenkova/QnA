@@ -54,6 +54,24 @@ RSpec.configure do |config|
 
   chrome_options.args << 'headless' unless ENV['SHOW_BROWSER']
 
+  Capybara.default_driver = :selenium
+
+  chrome_options = Selenium::WebDriver::Chrome::Options.new(
+    args: [
+      ## For constant resolutions and pretty Capybara screenshots
+      'window-size=1366,768',
+      ## For CI without camera
+      'use-fake-device-for-media-stream',
+      'use-fake-ui-for-media-stream'
+    ],
+    prefs: {
+      ## https://makandracards.com/makandra/71430-cucumber-testing-file-downloads-with-selenium
+      'download.default_directory' => DownloadHelpers::PATH
+    }
+  )
+
+  chrome_options.args << 'headless' unless ENV['SHOW_BROWSER']
+
   Capybara.register_driver :selenium do |app|
     Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
   end

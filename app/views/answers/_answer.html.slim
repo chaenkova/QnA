@@ -1,6 +1,11 @@
 - unless answer.new_record?
   div class="answer-#{answer.id}" data={best: "#{answer.best}"}
     p= answer.body
+    .links
+      p Links:
+      ul
+        - answer.links.each do |link|
+          li= link_to link.name, link.url
     - if answer.best
       p.best= "The best"
     = render partial: 'answers/files', locals: {answer: answer}

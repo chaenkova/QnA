@@ -50,6 +50,6 @@ class AnswersController < ApplicationController
   end
 
   def find_answer
-    @answer = Answer.with_attached_files.find(params[:id])
+    @answer = Answer.with_attached_files.find(params[:id], links_attributes: [:name, :url])
   end
 end
