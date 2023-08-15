@@ -7,13 +7,15 @@ gem 'rails', '~> 6.1.3'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
-# gem 'webpacker', '~> 5.0'
+gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'slim-rails', '~> 3.1', '>= 3.1.1'
 gem 'devise', '~> 4.8', '>= 4.8.1'
+gem "cocoon"
+gem 'validate_url'
 
 gem 'jquery-rails', '~> 4.4'
 

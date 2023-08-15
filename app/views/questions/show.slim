@@ -32,12 +32,11 @@ br
     = f.text_area :body
     = f.label :files
     = f.file_field :files, multiple: true
-    p Links:
-    = f.fields_for :links do |l|
-      = l.label :name, 'Link name'
-      = l.text_field :name
-      = l.label :url
-      = l.text_field :url
+      p Links:
+      = f.fields_for :links do |link|
+        == render 'link_fields', f: link
+      .links
+        = link_to_add_association 'Add link', f, :links
     = f.submit 'Create'
 
 .answers
