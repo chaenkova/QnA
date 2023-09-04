@@ -1,7 +1,11 @@
 $(document).on('turbolinks:load', function(){
-    $('.question').on('click', '.edit-question-link', function(e) {
-        e.preventDefault();
-        $(this).hide();
-        $('form#edit-question').removeClass('hidden');
-    })
+    const updateQuestions = () => {
+        $('.question').on('click', '.edit-question-link', (e) => {
+            e.preventDefault();
+            $(e.currentTarget).hide()
+            $('form#edit-question').removeClass('hidden');
+        })
+    }
+    window.updateQuestions = updateQuestions
+    updateQuestions()
 });

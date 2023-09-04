@@ -4,10 +4,7 @@
   h1=@question.title
   p.question-body= @question.body
   .links
-    p Links:
-    ul
-      - @question.links.each do |link|
-        li= link_to link.name, link.url
+    =render 'shared/render_links', resource: @question
 
   = render 'files', resource: @question
   br
@@ -21,6 +18,12 @@
       = f.text_area :body
       = f.label :files
       = f.file_field :files, multiple: true, direct_upload: true
+      p Links:
+      .links
+        = f.fields_for :links do |link|
+          == render 'link_fields', f: link
+        .link
+          = link_to_add_association 'Add link', f, :links
       = f.submit 'Save'
 br
 -if current_user.present?
@@ -32,10 +35,11 @@ br
     = f.text_area :body
     = f.label :files
     = f.file_field :files, multiple: true
-      p Links:
+    p Links:
+    .links
       = f.fields_for :links do |link|
         == render 'link_fields', f: link
-      .links
+      .link
         = link_to_add_association 'Add link', f, :links
     = f.submit 'Create'
 

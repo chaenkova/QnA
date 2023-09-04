@@ -2,10 +2,7 @@
   div class="answer-#{answer.id}" data={best: "#{answer.best}"}
     p= answer.body
     .links
-      p Links:
-      ul
-        - answer.links.each do |link|
-          li= link_to link.name, link.url
+      =render 'shared/render_links', resource: answer
     - if answer.best
       p.best= "The best"
     = render partial: 'answers/files', locals: {answer: answer}
@@ -20,8 +17,9 @@
         = f.label :files
         = f.file_field :files, multiple: true
         p Links:
-        = f.fields_for :links do |link|
-          == render 'link_fields', f: link
         .links
-          = link_to_add_association 'Add link', f, :links
-        = f.submit 'Save'
+          = f.fields_for :links do |link|
+            == render 'link_fields', f: link
+          .link
+            = link_to_add_association 'Add link', f, :links
+        = f.submit 'Save', id: 'new-answer-submit'
