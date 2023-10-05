@@ -6,6 +6,6 @@ class Link < ApplicationRecord
 
   def gist?
     link = URI.parse(url)
-    link.hostname == 'gist.github.com' && uri.path&.length > 2
+    link.hostname == 'gist.github.com' && link.path&.length > 2
   end
 end

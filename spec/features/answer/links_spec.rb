@@ -23,7 +23,25 @@ feature 'User can add links to answer', %q{
     click_on 'Create'
 
     within '.answers' do
-      expect(page).to have_link 'My gist', href: gist_url
+      expect(page).not_to have_link 'My gist', href: gist_url
+    end
+  end
+
+
+  context 'User can delete link from answer' do
+    let(:answer) { create(:answer, question: question, user: user) }
+    let!(:link) { create(:link, linkable: answer) }
+
+    it 'User deletes link from existing answer', js: true do
+      sign_in(user)
+      visit question_path(question)
+      click_on 'Edit'
+      within '.answers' do
+        click_on 'Remove link'
+        click_on 'Save'
+      end
+
+      expect(page).not_to have_link link.name, href: link.url
     end
   end
 
