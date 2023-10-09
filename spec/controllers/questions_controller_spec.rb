@@ -40,6 +40,10 @@ RSpec.describe QuestionsController, type: :controller do
       expect(assigns(:question).links.first).to be_a_new(Link)
     end
 
+    it 'assigns new Reward' do
+      expect(assigns(:question).reward).to be_a_new(Reward)
+    end
+
     it 'assigns a new Question to @question' do
       expect(assigns(:question)).to be_a_new(Question)
     end
@@ -91,7 +95,12 @@ RSpec.describe QuestionsController, type: :controller do
         patch :update, params: { id: question, question: attributes_for(:question), format: :js }
         expect(response).to redirect_to question
       end
+
+      it 'assigns new Reward' do
+        expect(assigns(:question).reward).to be_a_new(Reward)
+      end
     end
+
 
     context 'with invalid attributes' do
       before { patch :update, params: { id: question, question: attributes_for(:question, :invalid), format: :js } }
