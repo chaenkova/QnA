@@ -13,10 +13,12 @@ class QuestionsController < ApplicationController
   def new
     @question = Question.new
     @question.links.new
+    @question.build_reward
   end
 
   def edit
     @question.links.new
+    @question.reward.present? ? @question.reward : @question.build_reward
   end
 
   def create
@@ -56,6 +58,6 @@ class QuestionsController < ApplicationController
   helper_method :question
 
   def question_params
-    params.require(:question).permit(:title, :body, :id, files: [], links_attributes: %i[id name url _destroy])
+    params.require(:question).permit(:title, :body, :id, files: [], links_attributes: %i[id name url _destroy], reward_attributes: %i[id title image _destroy])
   end
 end

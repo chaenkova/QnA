@@ -5,6 +5,8 @@
   p.question-body= @question.body
   .links
     =render 'shared/render_links', resource: @question
+  .rewards
+    =render 'shared/render_rewards', resource: @question
 
   = render 'files', resource: @question
   br
@@ -24,6 +26,17 @@
           == render 'link_fields', f: link
         .link
           = link_to_add_association 'Add link', f, :links
+      p Rewards:
+      .reward
+        p
+          = f.fields_for :reward do |reward|
+            = reward.label :title, 'Reward name'
+            br
+            = reward.text_field :title
+            br
+            = reward.label :image, 'Reward'
+            br
+            = reward.file_field :image, direct_upload: true
       = f.submit 'Save'
 br
 -if current_user.present?

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :reward do
     title { 'Reward title' }
-    image { Rack::Test::UploadedFile.new(Rails.root.join('./links.rb')) }
+    image { Rack::Test::UploadedFile.new(Rails.root.join('app/assets/javascripts/question.js')) }
     question
 
     trait :no_image do

@@ -5,6 +5,7 @@
     $('.question-body').html('<%= @question.body %>');
     $('.question>.files').html('<%= render 'files', resource: @question %>');
     $('.question>.links').html('<%= render 'shared/render_links', resource: @question %>');
+    $('.question>.rewards').html('<%= render 'shared/render_rewards', resource: @question %>');
     $('form#edit-question').addClass('hidden');
     updateQuestions()
     $('.edit-question-link').show();

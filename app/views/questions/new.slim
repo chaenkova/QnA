@@ -13,4 +13,15 @@
       == render 'link_fields', f: link
     .link
       = link_to_add_association 'Add link', f, :links
+  p Rewards:
+  .reward
+    p
+      = f.fields_for :reward do |reward|
+        = reward.label :title, 'Reward name'
+        br
+        = reward.text_field :title
+        br
+        = reward.label :image, 'Reward'
+        br
+        = reward.file_field :image, direct_upload: true
   = f.submit 'Ask'

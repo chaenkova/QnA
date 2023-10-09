@@ -13,6 +13,7 @@ class Answer < ApplicationRecord
       best.update(best: false)
       self.update(best: true)
     end
+    question.reward.update(user: user) if question.reward.present?
   end
 
   def delete_file(file_id)

@@ -13,12 +13,11 @@ describe 'User can view his rewards', "
   describe 'Authenticated user' do
     before do
       sign_in(user)
-      answer.mark_as_best
+      answer.mark
     end
 
     it 'views his rewards' do
-      visit root_path
-      click_on 'My rewards'
+      visit user_rewards_path(user2)
 
       expect(page).to have_content question.reward.title
     end

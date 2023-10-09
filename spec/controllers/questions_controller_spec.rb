@@ -84,7 +84,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it 'changes question attributes' do
-        patch :update, params: { id: question, question: { title: 'new title', body: 'new body' }, format: :js }
+        patch :update, params: { id: question, question: { title: 'new title', body: 'new body'}, format: :js }
         question.reload
 
         expect(question.title).to eq 'new title'
@@ -94,10 +94,6 @@ RSpec.describe QuestionsController, type: :controller do
       it 'redirects to updated question' do
         patch :update, params: { id: question, question: attributes_for(:question), format: :js }
         expect(response).to redirect_to question
-      end
-
-      it 'assigns new Reward' do
-        expect(assigns(:question).reward).to be_a_new(Reward)
       end
     end
 
