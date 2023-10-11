@@ -35,6 +35,18 @@ RSpec.describe QuestionsController, type: :controller do
     it 'renders new view' do
       expect(response).to render_template :new
     end
+
+    it 'assigns a new link to @question' do
+      expect(assigns(:question).links.first).to be_a_new(Link)
+    end
+
+    it 'assigns new Reward' do
+      expect(assigns(:question).reward).to be_a_new(Reward)
+    end
+
+    it 'assigns a new Question to @question' do
+      expect(assigns(:question)).to be_a_new(Question)
+    end
   end
 
   describe 'POST #create' do
@@ -72,7 +84,7 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it 'changes question attributes' do
-        patch :update, params: { id: question, question: { title: 'new title', body: 'new body' }, format: :js }
+        patch :update, params: { id: question, question: { title: 'new title', body: 'new body'}, format: :js }
         question.reload
 
         expect(question.title).to eq 'new title'
@@ -84,6 +96,7 @@ RSpec.describe QuestionsController, type: :controller do
         expect(response).to redirect_to question
       end
     end
+
 
     context 'with invalid attributes' do
       before { patch :update, params: { id: question, question: attributes_for(:question, :invalid), format: :js } }

@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   post '/answers/:id', to: 'answers#mark_as_best', as: 'mark_as_best'
   delete '/answers/:id/files/:file_id', to: 'answers#delete_file', as: 'answer_delete_file'
   delete '/questions/:id/files/:file_id', to: 'questions#delete_file', as: 'question_delete_file'
+  get '/users/:id/rewards', to: 'users#rewards', as: 'user_rewards'
   root to:"questions#index"
 end

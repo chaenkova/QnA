@@ -38,6 +38,18 @@ feature 'User can create question', %q{
       expect(page).to have_link 'spec_helper'
     end
 
+    scenario 'asks a question with rewards' do
+
+      fill_in 'Title', with: 'Test question'
+      fill_in 'Body', with: 'Test text'
+
+      fill_in 'Reward name', with: 'You the best'
+      attach_file 'Reward', "#{Rails.root}/spec/rails_helper.rb"
+
+      click_on 'Ask'
+
+      expect(page).to have_content 'Reward name'
+    end
 
     scenario 'asks a question with errors' do
 

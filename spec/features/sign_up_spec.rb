@@ -9,7 +9,7 @@ feature 'Guest can sign up', "
   background { visit new_user_registration_path }
 
   scenario 'Guest tries to sign up' do
-    fill_in 'Email', with: 'bvv33@yandex.ru' # user.email #
+    fill_in 'Email', with: 'newtest@test.com'
     fill_in 'Password', with: user.password
     fill_in 'Password confirmation', with: user.password_confirmation
     click_on 'Sign up'

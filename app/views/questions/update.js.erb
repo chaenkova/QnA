@@ -4,14 +4,10 @@
     $('h1').html('<%= @question.title %>');
     $('.question-body').html('<%= @question.body %>');
     $('.question>.files').html('<%= render 'files', resource: @question %>');
-    $('#edit-question-link').addClass('hidden');
-
-    $(document).on('turbolinks:load', function(){
-        $('.question').on('click', '.edit-question-link', function(e) {
-            e.preventDefault();
-            $(this).hide();
-            $('form#edit-question').removeClass('hidden');
-        })
-    });
+    $('.question>.links').html('<%= render 'shared/render_links', resource: @question %>');
+    $('.question>.rewards').html('<%= render 'shared/render_rewards', resource: @question %>');
+    $('form#edit-question').addClass('hidden');
+    updateQuestions()
+    $('.edit-question-link').show();
 
 <% end %>

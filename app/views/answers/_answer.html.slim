@@ -1,6 +1,8 @@
 - unless answer.new_record?
   div class="answer-#{answer.id}" data={best: "#{answer.best}"}
     p= answer.body
+    .links
+      =render 'shared/render_links', resource: answer
     - if answer.best
       p.best= "The best"
     = render partial: 'answers/files', locals: {answer: answer}
@@ -14,4 +16,10 @@
         = f.text_area :body
         = f.label :files
         = f.file_field :files, multiple: true
-        = f.submit 'Save'
+        p Links:
+        .links
+          = f.fields_for :links do |link|
+            == render 'link_fields', f: link
+          .link
+            = link_to_add_association 'Add link', f, :links
+        = f.submit 'Save', id: 'new-answer-submit'
