@@ -1,4 +1,5 @@
 .question
+  = render 'files', resource: @question
   .question-errors
     = render 'shared/errors', resource: @question
   h1=@question.title
@@ -7,8 +8,7 @@
     =render 'shared/render_links', resource: @question
   .rewards
     =render 'shared/render_rewards', resource: @question
-
-  = render 'files', resource: @question
+  = render 'shared/vote', resource: @question
   br
   - if current_user&.author?(@question)
     p = button_to 'Delete question',question_path(@question), method: :delete
