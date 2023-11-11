@@ -1,0 +1,27 @@
+. class="errors-#{resource.class.name.downcase.pluralize}-vote"
+. class="rating" id="#{resource.class.name.downcase.pluralize}-id-#{resource.id}-rating"
+  . class ="vote vote-#{resource.class.name.downcase.pluralize}"
+    .vote-value
+      = resource.rating
+    br
+    - unless !user_signed_in? || current_user&.author?(resource)
+      . class="up#{' hidden' if resource.voted_before?(current_user)}"
+        = link_to '+', polymorphic_path(resource, action: :vote_plus),
+                  data: { type: :json },
+                  method: :put,
+                  local: false,
+                  remote: true
+      br
+      . class="down#{' hidden' if resource.voted_before?(current_user)}"
+        = link_to '-', polymorphic_path(resource, action: :vote_minus),
+                  data: { type: :json },
+                  method: :put,
+                  local: false,
+                  remote: true
+      br
+      . class="cancel#{' hidden' unless resource.voted_before?(current_user)}"
+        = link_to 'Cancel', polymorphic_path(resource, action: :cancel),
+                  data: { type: :json },
+                  method: :delete,
+                  local: false,
+                  remote: true

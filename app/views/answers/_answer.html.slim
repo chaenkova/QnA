@@ -1,6 +1,7 @@
 - unless answer.new_record?
   div class="answer-#{answer.id}" data={best: "#{answer.best}"}
     p= answer.body
+    = render 'shared/vote', resource: answer
     .links
       =render 'shared/render_links', resource: answer
     - if answer.best
