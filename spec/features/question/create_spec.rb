@@ -82,10 +82,8 @@ feature 'User can create question', %q{
 
         click_on 'Ask question'
 
-        within '.new-question' do
-          fill_in 'Title', with: 'Question with comet'
-          fill_in 'Body', with: 'comet comet comet'
-        end
+        fill_in 'Title', with: 'Question with comet'
+        fill_in 'Body', with: 'comet comet comet'
 
         click_on 'Ask'
       end
