@@ -20,5 +20,6 @@ RSpec.describe Question, type: :model do
       let(:user) { create(:user) }
       let!(:resource) { create(:question, user: user) }
     end
+    it_behaves_like 'commentable'
   end
 end

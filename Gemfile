@@ -10,7 +10,7 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
-# gem 'redis', '~> 4.0'
+gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'slim-rails', '~> 3.1', '>= 3.1.1'
 gem 'devise', '~> 4.8', '>= 4.8.1'
@@ -18,6 +18,8 @@ gem "cocoon"
 gem 'validate_url'
 
 gem 'jquery-rails', '~> 4.4'
+gem 'gon', '~> 6.2'
+gem 'skim', '~> 0.11'
 
 # gem 'image_processing', '~> 1.2'
 

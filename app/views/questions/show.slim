@@ -4,6 +4,13 @@
     = render 'shared/errors', resource: @question
   h1=@question.title
   p.question-body= @question.body
+  div class="question-id-#{@question.id}-comments comments"
+    p Comments:
+    - if @question.comments.any?
+      = render @question.comments
+    - if current_user.present?
+      p New Comment:
+      = render 'comments/new', resource: @question
   .links
     =render 'shared/render_links', resource: @question
   .rewards

@@ -23,7 +23,7 @@ feature 'User can add links to answer', %q{
     click_on 'Create'
 
     within '.answers' do
-      expect(page).not_to have_link 'My gist', href: gist_url
+      expect(page).to have_link 'My gist', href: gist_url
     end
   end
 

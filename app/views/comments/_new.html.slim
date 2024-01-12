@@ -1,0 +1,10 @@
+.comment-errors
+  - if @comment.present?
+    = render 'shared/errors', resource: @comment
+
+= form_with model: [resource, Comment.new], class: "#{resource.class.to_s.downcase}-id-#{resource.id}-new-comment", local: false do |f|
+  p
+    = f.label :body, 'Your comment'
+    = f.text_area :body
+
+  = f.submit 'Create comment'

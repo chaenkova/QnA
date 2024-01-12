@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   include Voted 
   before_action :authenticate_user!, except: [:index, :show]
   before_action :question, except: [:index]
+  before_action :set_gon, only: [:show]
+  after_action :publish_question, only: %i[create]
   def index
     @questions = Question.all
   end
@@ -52,6 +54,20 @@ class QuestionsController < ApplicationController
 
   private
 
+  def publish_question
+    return if @question.errors.any?
+    ActionCable.server.broadcast(
+      'questions',
+      ApplicationController.render(
+        partial: 'questions/question',
+        locals: {
+          question: @question,
+          current_user: current_user
+        }
+      )
+    )
+  end
+
   def question
     @question ||= params[:id] ? Question.with_attached_files.find(params[:id]) : Question.new
   end
@@ -60,5 +76,10 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body, :id, files: [], links_attributes: %i[id name url _destroy], reward_attributes: %i[id title image _destroy])
+  end
+
+  def set_gon
+    gon.question_id = @question.id
+    gon.current_user_id = current_user&.id
   end
 end

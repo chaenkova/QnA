@@ -36,8 +36,10 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include ControllerHelpers, type: :controller
   config.include FeatureHelpers, type: :feature
+  config.include ActionCable::TestHelper
   Capybara.javascript_driver = :selenium_chrome_headless
   Capybara.default_driver = :selenium
+
 
   chrome_options = Selenium::WebDriver::Chrome::Options.new(
     args: [
