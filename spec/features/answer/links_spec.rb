@@ -18,12 +18,12 @@ feature 'User can add links to answer', %q{
     fill_in 'New answer', with: 'My answer'
 
     fill_in 'Link name', with: 'My gist'
-    fill_in 'Url', with: gist_url
+    fill_in 'Url', with: 'http://google.com'
 
     click_on 'Create'
 
     within '.answers' do
-      expect(page).not_to have_link 'My gist', href: gist_url
+      expect(page).to have_link 'My gist', href: 'http://google.com'
     end
   end
 

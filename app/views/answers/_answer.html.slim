@@ -24,3 +24,10 @@
           .link
             = link_to_add_association 'Add link', f, :links
         = f.submit 'Save', id: 'new-answer-submit'
+    br
+    div class="answer-id-#{answer.id}-comments comments"
+      p Comments:
+      -if answer.comments.any?
+        = render answer.comments
+    p New Comment:
+    = render 'comments/new', resource: answer

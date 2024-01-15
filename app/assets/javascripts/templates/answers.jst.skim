@@ -1,0 +1,30 @@
+- if (gon.user_id != @answer.user_id)
+  . class="answer-id-#{@answer.id}"
+    p #{@answer.body}
+
+    . class="rating" id="answer-id-#{@answer.id}-rating"
+      .vote-value
+        p #{@rating}
+
+      . class="up"
+        a href="/answers/#{@answer.id}/vote_plus" data-method="put" data-type="json" data-remote="true" data-local="false" +
+
+      . class="down"
+        a href="/answers/#{@answer.id}/vote_minus" data-method="put" data-type="json" data-remote="true" data-local="false" '-'
+
+    - if (gon.user_id == @question_author.id)
+      . class="mark-answer-as-best-link"
+        a href="/answers/#{@answer.id}/mark__as_best" data-method="patch" data-remote="true" data-local="false" Mark as best
+
+    - if (@files.length > 0)
+      - for file in @files
+        . class="attachment-#{file.id}"
+          a href=file.url = file.name
+
+    - if (@links.length > 0)
+      .answer-links
+        p Links:
+        ul
+          - for link in @links
+            . class="link-#{link.id}"
+              a href=link.url = link.name
