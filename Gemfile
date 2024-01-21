@@ -20,6 +20,8 @@ gem 'validate_url'
 gem 'jquery-rails', '~> 4.4'
 gem 'gon', '~> 6.2'
 gem 'skim', '~> 0.11'
+gem 'omniauth'
+gem 'omniauth-github'
 
 # gem 'image_processing', '~> 1.2'
 
