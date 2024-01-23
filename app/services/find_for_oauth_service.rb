@@ -12,14 +12,13 @@ class FindForOauthService
 
     email = auth.info[:email]
     user = User.where(email: email).first
-    if user
-      user.create_authorization(auth)
-    else
+    unless user
       password = Devise.friendly_token[0, 20]
-      user = User.create!(email: email, password: password, password_confirmation: password)
-      user.create_authorization(auth)
+      user = User.create!(email: email, password: password, password_confirmation: password, confirmed_at: DateTime.now)
+      user.skip_confirmation_notification!
     end
-
+    user.create_authorization(auth)
     user
   end
+
 end

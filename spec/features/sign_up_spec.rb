@@ -8,13 +8,26 @@ feature 'Guest can sign up', "
   given(:user) { create(:user) }
   background { visit new_user_registration_path }
 
-  scenario 'Guest tries to sign up' do
-    fill_in 'Email', with: 'newtest@test.com'
-    fill_in 'Password', with: user.password
-    fill_in 'Password confirmation', with: user.password_confirmation
-    click_on 'Sign up'
 
-    expect(page).to have_content 'Welcome! You have signed up successfully.'
+  context 'Guest tries to sign up with valid params' do
+    background do
+      fill_in 'Email', with: 'newtest@test.com'
+      fill_in 'Password', with: user.password
+      fill_in 'Password confirmation', with: user.password_confirmation
+      click_on 'Sign up'
+    end
+
+    scenario 'user receives a confirmation email' do
+      expect(page).to have_content 'A message with a confirmation link has been sent to your email address.'
+    end
+
+    scenario 'user can confirm email' do
+      open_email(user.email.to_s)
+      current_email.click_link 'Confirm my account'
+
+      expect(page).to have_content 'Your email address has been successfully confirmed.'
+    end
+
   end
 
   scenario 'Guest tries to sign up with invalid data' do
