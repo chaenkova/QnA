@@ -24,9 +24,10 @@ class CommentsController < ApplicationController
 
     question_id = @commentable.instance_of?(Question) ? @commentable.id : @commentable.question_id
     ActionCable.server.broadcast(
-      "question_#{question_id}_comments",
-      comment: @comment,
-      user: @comment.user
+      "question/#{question_id}/comments",
+        comment: @comment.as_json,
+        user: @comment.user.as_json
+
     )
   end
 

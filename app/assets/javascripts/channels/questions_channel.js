@@ -10,7 +10,6 @@ $(document).on('turbolinks:load', function(){
         },
 
         received(content) {
-            console.log(content)
             $('.questions-list').append(content)
         },
 

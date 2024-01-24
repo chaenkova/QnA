@@ -20,6 +20,10 @@ gem 'validate_url'
 gem 'jquery-rails', '~> 4.4'
 gem 'gon', '~> 6.2'
 gem 'skim', '~> 0.11'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-vkontakte'
+gem 'omniauth-rails_csrf_protection'
 
 # gem 'image_processing', '~> 1.2'
 
@@ -29,6 +33,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.1', '>= 5.1.2'
   gem 'factory_bot_rails'
+  gem 'letter_opener'
 end
 
 group :development do
@@ -49,6 +54,7 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
   gem 'rails-controller-testing'
   gem 'launchy'
+  gem 'capybara-email'
 end
 
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
