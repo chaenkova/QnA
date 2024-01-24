@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'capybara/email/rspec'
 
 feature 'Guest can sign up', "
   In order to to create questions and answers

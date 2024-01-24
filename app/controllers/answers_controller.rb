@@ -6,6 +6,9 @@ class AnswersController < ApplicationController
   before_action :find_question, only: %i[create publish_answer]
   before_action :find_answer, only: %i[destroy update mark_as_best delete_file]
   after_action :publish_answer, only: :create
+
+  authorize_resource
+
   def new
     @answer = Answer.new
     render 'questions/show'

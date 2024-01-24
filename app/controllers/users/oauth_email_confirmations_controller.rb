@@ -1,4 +1,5 @@
 class Users::OauthEmailConfirmationsController < ApplicationController
+  skip_authorization_check
   before_action :find_or_create_user, only: :create
 
   def new
