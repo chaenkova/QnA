@@ -43,15 +43,13 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy if current_user.author?(@question)
+    @question.destroy
     redirect_to questions_path
   end
 
   def delete_file
-    if current_user.author?(@question)
-      @question.delete_file(params[:file_id])
-      redirect_to question_path(@question)
-    end
+    @question.delete_file(params[:file_id])
+    redirect_to question_path(@question)
   end
 
   private
