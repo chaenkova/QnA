@@ -6,6 +6,9 @@ class AnswersController < ApplicationController
   before_action :find_question, only: %i[create publish_answer]
   before_action :find_answer, only: %i[destroy update mark_as_best delete_file]
   after_action :publish_answer, only: :create
+
+  authorize_resource
+
   def new
     @answer = Answer.new
     render 'questions/show'
@@ -49,18 +52,12 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    if current_user.author?(@answer)
-      @answer.destroy
-      @question = @answer.question
-      render layout: false
-    else
-      redirect_to questions_path
-    end
+    @answer.destroy
+    @question = @answer.question
+    render layout: false
   end
 
   def mark_as_best
-    return unless current_user.author?(@answer.question)
-
     @answer.mark
     @question = @answer.question
     render layout: false

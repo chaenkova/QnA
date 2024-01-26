@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class OauthCallbacksController < Devise::OmniauthCallbacksController
+
+  skip_authorization_check
   def github
     oauth_sign_in('github')
   end

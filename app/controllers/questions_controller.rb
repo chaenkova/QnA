@@ -4,6 +4,8 @@ class QuestionsController < ApplicationController
   before_action :question, except: [:index]
   before_action :set_gon, only: [:show]
   after_action :publish_question, only: %i[create]
+
+  authorize_resource
   def index
     @questions = Question.all
   end
@@ -41,15 +43,13 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question.destroy if current_user.author?(@question)
+    @question.destroy
     redirect_to questions_path
   end
 
   def delete_file
-    if current_user.author?(@question)
-      @question.delete_file(params[:file_id])
-      redirect_to question_path(@question)
-    end
+    @question.delete_file(params[:file_id])
+    redirect_to question_path(@question)
   end
 
   private

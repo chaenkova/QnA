@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'capybara/email/rspec'
 
 feature 'User can sign in with github oauth2', '
   In order to ask questions
