@@ -17,6 +17,7 @@ class Ability
 
   def guest_abilities
     can :read, :all
+    can :rewards,  User
   end
 
   def admin_abilities
@@ -28,5 +29,10 @@ class Ability
     can :create, [Question, Answer, Comment]
     can :update, [Question, Answer], { user_id: user.id }
     can :destroy, [Question, Answer], { user_id: user.id }
+    can :delete_file, [Question, Answer], { user_id: user.id }
+    can :mark_as_best, [Answer]
+    can :vote_plus, [Question, Answer, Comment]
+    can :vote_minus, [Question, Answer, Comment]
+    can :cancel, [Question, Answer, Comment]
   end
 end

@@ -65,7 +65,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'redirects to questions list' do
         delete :destroy, params: { id: answer }
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to root_path
       end
     end
 
@@ -84,7 +84,6 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'PATCH #update' do
     before { login(user) }
-    let!(:answer) { create(:answer, question: question) }
 
     context 'with valid attributes' do
       it 'changes answer attributes' do

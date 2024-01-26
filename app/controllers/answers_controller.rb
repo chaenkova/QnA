@@ -52,18 +52,12 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    if current_user.author?(@answer)
-      @answer.destroy
-      @question = @answer.question
-      render layout: false
-    else
-      redirect_to questions_path
-    end
+    @answer.destroy
+    @question = @answer.question
+    render layout: false
   end
 
   def mark_as_best
-    return unless current_user.author?(@answer.question)
-
     @answer.mark
     @question = @answer.question
     render layout: false

@@ -59,12 +59,5 @@ feature 'User can edit question', %q{
 
     expect(page).to_not have_link 'Edit'
   end
-  scenario 'Unauthenticated user tries edit a question', js: true do
-    visit questions_path
-    click_on 'Ask question'
-
-    expect(page).to have_content 'You need to sign in or sign up before continuing.'
-
-  end
 
 end
