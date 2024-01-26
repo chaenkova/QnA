@@ -41,6 +41,7 @@ RSpec.configure do |config|
   config.include FeatureHelpers, type: :feature
   config.include ActionCable::TestHelper
   config.include OmniauthMacros
+  config.include ApiHelpers, type: :request
   Capybara.javascript_driver = :selenium_chrome_headless
   Capybara.default_driver = :selenium
 
