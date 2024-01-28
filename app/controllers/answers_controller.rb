@@ -26,6 +26,12 @@ class AnswersController < ApplicationController
         "question/#{@question.id}/answers",
         hash_for_cable
     )
+
+    send_notif
+  end
+
+  def send_notif
+    SendNewAnswerJob.perform_later(@answer, @answer.question)
   end
   def hash_for_cable
     hash = {

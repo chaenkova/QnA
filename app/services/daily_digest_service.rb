@@ -1,7 +1,11 @@
+# frozen_string_literal: true
 class DailyDigestService
   def send_digest
+    questions = Question.where(created_at: Date.yesterday.all_day).to_a
+    return if questions.empty?
+
     User.find_each(batch_size: 500) do |user|
-      DailyDigestMailer.digest(user).deliver_later
+      DailyDigestMailer.digest(user, questions).deliver_later
     end
   end
 end

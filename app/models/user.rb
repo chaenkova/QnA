@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :rewards, dependent: :destroy
   has_many :votes
   has_many :authorizations, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   def author?(item)
     id == item.user_id
@@ -20,5 +21,9 @@ class User < ApplicationRecord
 
   def create_authorization(auth)
     authorizations.create(provider: auth.provider, uid: auth.uid)
+  end
+
+  def subscribed_of?(question)
+    question.subscriptions.find_by(user_id: id).present?
   end
 end
