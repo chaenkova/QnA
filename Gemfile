@@ -17,6 +17,9 @@ gem 'devise', '~> 4.8', '>= 4.8.1'
 gem "cocoon"
 gem 'validate_url'
 gem 'cancancan'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'whenever', require: false
 
 gem 'jquery-rails', '~> 4.4'
 gem 'gon', '~> 6.2'
