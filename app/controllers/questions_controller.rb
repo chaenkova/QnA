@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   before_action :question, except: [:index]
   before_action :set_gon, only: [:show]
   after_action :publish_question, only: %i[create]
+  before_action :subscription, only: %i[show update]
 
   authorize_resource
   def index
@@ -81,5 +82,9 @@ class QuestionsController < ApplicationController
   def set_gon
     gon.question_id = @question.id
     gon.current_user_id = current_user&.id
+  end
+
+  def subscription
+    @subscription = @question.subscriptions.find_by(user: current_user)
   end
 end

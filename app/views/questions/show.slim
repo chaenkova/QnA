@@ -1,4 +1,7 @@
 .question
+  .subscription
+    - if can?(:create, Subscription)
+      = render 'subscriptions/subscription', resource: @question
   = render 'files', resource: @question
   .question-errors
     = render 'shared/errors', resource: @question
