@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   delete '/questions/:id/files/:file_id', to: 'questions#delete_file', as: 'question_delete_file'
   get '/users/:id/rewards', to: 'users#rewards', as: 'user_rewards'
   root to:"questions#index"
+  resources :search, only: :index
 
   mount ActionCable.server => '/cable'
 
