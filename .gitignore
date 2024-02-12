@@ -60,6 +60,8 @@ build-iPhoneSimulator/
 
 /config/database.yml
 /config/master.key
+/config/*.sphinx.conf;
+db/sphinx
 
 .idea/*
 /public/packs

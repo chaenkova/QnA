@@ -2,6 +2,8 @@
 
 FactoryBot.define do
   factory :comment do
-    body { 'MyText' }
-  end
+    sequence :body do |n|
+      "Comment body #{n}"
+    end
+    end
 end
