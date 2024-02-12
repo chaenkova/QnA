@@ -31,6 +31,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'doorkeeper'
 gem 'active_model_serializers', '~> 0.10'
 gem 'oj'
+gem 'bcrypt_pbkdf', '~> 1.0'
+gem 'ed25519','~> 1.2'
 
 # gem 'image_processing', '~> 1.2'
 
@@ -52,6 +54,12 @@ group :development do
   gem 'rubocop-rails', '~> 2.14', require: false
   gem 'rubocop-rspec', '~> 2.10', require: false
   gem 'rubocop-performance', '~> 1.13', require: false
+
+  gem 'capistrano', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-passenger', require: false
 end
 
 group :test do
