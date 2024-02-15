@@ -500,7 +500,7 @@ DEPENDENCIES
   omniauth-github
   omniauth-rails_csrf_protection
   omniauth-vkontakte
-  pg (~> 1.1)
+  pg
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.3)

@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.4'
 gem 'aws-sdk-s3', require: false
 gem 'rails', '~> 6.1.3'
-gem 'pg', '~> 1.1'
+gem 'pg'
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
