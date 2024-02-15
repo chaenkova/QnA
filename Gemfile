@@ -20,6 +20,10 @@ gem 'cancancan'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'whenever', require: false
+gem 'mysql2',          '~> 0.5.3', :platform => :ruby
+gem 'thinking-sphinx', '~> 5.5.1', :require => 'thinking_sphinx/sinatra'
+gem 'jdbc-mysql',      '~> 5.1.35', :platform => :jruby
+gem 'database_cleaner-active_record'
 
 gem 'jquery-rails', '~> 4.4'
 gem 'gon', '~> 6.2'

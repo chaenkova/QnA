@@ -11,13 +11,13 @@ RSpec.describe SendNewAnswerService do
     Subscription.find_each do |subscription|
       expect(NewAnswerMailer).to receive(:send_answer).with(subscription.user, answer).and_call_origin
     end
-    subject.send_notification(answer)
+    subject.send_notification(answer, answer.question)
   end
 
   context 'unsubscribed user' do
     let(:user) { create(:user) }
     it 'does not send new answer' do
-      subject.send_notification(answer)
+      subject.send_notification(answer, answer.question)
       expect(NewAnswerMailer).to_not receive(:send_answer).with(user, answer).and_call_original
     end
   end
