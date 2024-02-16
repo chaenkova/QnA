@@ -39,7 +39,6 @@ gem 'bcrypt_pbkdf', '~> 1.0'
 gem 'ed25519','~> 1.2'
 gem "mini_racer"
 
-
 # gem 'image_processing', '~> 1.2'
 
 gem 'bootsnap', '>= 1.4.4', require: false
