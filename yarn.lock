@@ -1106,7 +1106,7 @@
 
 "@rails/webpacker@5.4.4":
   version "5.4.4"
-  resolved "https://registry.npmjs.org/@rails/webpacker/-/webpacker-5.4.4.tgz"
+  resolved "https://registry.yarnpkg.com/@rails/webpacker/-/webpacker-5.4.4.tgz#971a41b987c096c908ce4088accd57c1a9a7e2f7"
   integrity sha512-hp9myb2MChYFPfE5Fd/3gF4q2m4wpxC+WWCkxcg6My3HYCptWuqMVXRwrBZ5EJHYiL/WRyMLvVNWwlFV47xhUw==
   dependencies:
     "@babel/core" "^7.15.0"
