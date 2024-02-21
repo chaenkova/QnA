@@ -11,6 +11,7 @@ set :branch, "capistrano"
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deployer/qna" #дирка для деплоя!!! (посмотреть, точно ли мне в домик кидать. )
 set :deploy_user, 'deployer'
+set :passenger_restart_with_touch, true
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
