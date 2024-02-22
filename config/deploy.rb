@@ -4,6 +4,7 @@ lock "~> 3.18.0"
 set :application, "qna"
 set :repo_url, "git@github.com:chaenkova/QnA.git"
 set :branch, "capistrano"
+set :pty, false
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
