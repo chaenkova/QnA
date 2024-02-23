@@ -68,12 +68,15 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
-    address:              'smtp.mail.ru',
-    port:                 587,
-    user_name:            Rails.application.credentials[Rails.env.to_sym][:gmail][:username],
-    password:             Rails.application.credentials[Rails.env.to_sym][:gmail][:password],
-    authentication:       'plain',
-    enable_starttls_auto: true }
+    address: 'smtp.mail.ru',
+    port: 465,
+    domain: 'mail.ru',
+    user_name: Rails.application.credentials[Rails.env.to_sym][:gmail][:username],
+    password: Rails.application.credentials[Rails.env.to_sym][:gmail][:password],
+    authentication: 'login',
+    openssl_verify_mode: 'peer',
+    tls: true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
