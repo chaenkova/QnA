@@ -1,4 +1,0 @@
-' New questions of the last day
-
-- @questions.each do |question|
-  = question.title
