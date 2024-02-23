@@ -13,7 +13,7 @@ $(document).on('turbolinks:load', function(){
         received(content) {
             console.log('received')
             console.log(content)
-            if (gon.user_id !== content.comment.user_id) {
+            if (gon.user_id !== content.user_id) {
                 let commentClass = content.comment.commentable_type + '-id-' + content.comment.commentable_id + '-comments'
                 console.log(commentClass)
                 $('.' + commentClass).append(JST["templates/comments"]({
