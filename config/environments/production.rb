@@ -69,7 +69,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
     address: 'smtp.mail.ru',
-    port: 465,
+    port: 587,
     domain: 'mail.ru',
     user_name: Rails.application.credentials[Rails.env.to_sym][:gmail][:username],
     password: Rails.application.credentials[Rails.env.to_sym][:gmail][:password],
