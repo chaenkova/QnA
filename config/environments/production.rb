@@ -72,10 +72,7 @@ Rails.application.configure do
     port: 587,
     domain: 'mail.ru',
     user_name: Rails.application.credentials[Rails.env.to_sym][:gmail][:username],
-    password: Rails.application.credentials[Rails.env.to_sym][:gmail][:password],
-    authentication: 'login',
-    openssl_verify_mode: 'peer',
-    tls: true
+    password: Rails.application.credentials[Rails.env.to_sym][:gmail][:password]
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
