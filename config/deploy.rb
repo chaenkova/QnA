@@ -3,7 +3,7 @@ lock "~> 3.18.0"
 
 set :application, "qna"
 set :repo_url, "git@github.com:chaenkova/QnA.git"
-set :branch, "main"
+set :branch, "unicorn"
 set :pty, false
 
 # Default branch is :master
@@ -41,3 +41,5 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+after 'deploy:publishing', 'unicorn:restart'

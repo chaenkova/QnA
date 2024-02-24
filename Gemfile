@@ -38,6 +38,7 @@ gem 'oj'
 gem 'bcrypt_pbkdf', '~> 1.0'
 gem 'ed25519','~> 1.2'
 gem "mini_racer"
+gem "unicorn"
 
 # gem 'image_processing', '~> 1.2'
 
@@ -67,6 +68,7 @@ group :development do
   gem 'capistrano-passenger', require: false
   gem 'capistrano-sidekiq', require: false
   gem 'capistrano-yarn', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :test do
