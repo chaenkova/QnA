@@ -43,3 +43,6 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :ssh_options, verify_host_key: :secure
 
 after 'deploy:publishing', 'unicorn:restart'
+after "deploy:publishing", "thinking_sphinx:configure"
+after "thinking_sphinx:configure", "thinking_sphinx:rebuild"
+
