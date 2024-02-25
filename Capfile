@@ -9,7 +9,6 @@ require "capistrano/passenger"
 require "capistrano/bundler"
 require "capistrano/rails"
 require "thinking_sphinx/capistrano"
-require 'thinking_sphinx/deploy/capistrano'
 require "whenever/capistrano"
 require 'capistrano/sidekiq'
 require "capistrano3/unicorn"
