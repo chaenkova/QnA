@@ -5,20 +5,21 @@
   = render 'files', resource: @question
   .question-errors
     = render 'shared/errors', resource: @question
-  h1=@question.title
-  p.question-body= @question.body
-  div class="question-id-#{@question.id}-comments comments"
-    p Comments:
-    - if @question.comments.any?
-      = render @question.comments
-    - if current_user.present?
-      p New Comment:
-      = render 'comments/new', resource: @question
-  .links
-    =render 'shared/render_links', resource: @question
-  .rewards
-    =render 'shared/render_rewards', resource: @question
-  = render 'shared/vote', resource: @question
+  -cache @question do
+    h1=@question.title
+    p.question-body= @question.body
+    div class="question-id-#{@question.id}-comments comments"
+      p Comments:
+      - if @question.comments.any?
+        = render @question.comments
+      - if current_user.present?
+        p New Comment:
+        = render 'comments/new', resource: @question
+    .links
+      =render 'shared/render_links', resource: @question
+    .rewards
+      =render 'shared/render_rewards', resource: @question
+    = render 'shared/vote', resource: @question
   br
   - if current_user&.author?(@question)
     p = button_to 'Delete question',question_path(@question), method: :delete

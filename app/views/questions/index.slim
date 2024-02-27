@@ -1,7 +1,8 @@
-.questions-list
-  = render @questions
-- if can?(:create, Question)
-  p=link_to 'Ask question', new_question_path
+- cache collection_cache_key_for: @questions do
+  .questions-list
+    = render @questions
+  - if can?(:create, Question)
+    p=link_to 'Ask question', new_question_path
 - if current_user.present?
   p=button_to 'Log out', destroy_user_session_path, method: :delete
 - unless current_user.present?
