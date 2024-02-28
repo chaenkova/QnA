@@ -1,6 +1,7 @@
-div class="comment-id-#{comment.id}"
-  div class="comment-errors-#{comment.id}"
-    = render 'shared/errors', resource: comment
+- cache comment do
+  div class="comment-id-#{comment.id}"
+    div class="comment-errors-#{comment.id}"
+      = render 'shared/errors', resource: comment
 
-  p= comment.body
-  i= "by " + comment.user.email
+    p= comment.body
+    i= "by " + comment.user.email
